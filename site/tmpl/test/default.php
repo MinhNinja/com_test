@@ -18,13 +18,17 @@ defined('_JEXEC') or die;
         </div>
     <?php endif; ?>
 
-    <?php if (JFactory::getUser()->id == $this->data->id) : ?>
-        <ul class="btn-toolbar float-right">
+    <?php if ( count($this->data ) ) : 
+        foreach ( $this->data as $i=>$user ) : ?>
+        <ul class="">
             <li class="btn-group">
-                <a class="btn" href="<?php echo JRoute::_('index.php?option=com_test&task=test.view&user_id=' . (int) $this->data->id); ?>">
-                    <span class="icon-user"></span> <?php echo JText::_('COM_USERS_EDIT_PROFILE'); ?>
+                <a class="btn" href="<?php echo JRoute::_('index.php?option=com_test&view=profile&user_id=' . (int) $user->id); ?>">                   
+                #<?php echo ++$i ?>  <span class="icon-user"></span>: <?php echo $user->name; ?>
                 </a>
             </li>
         </ul>
-    <?php endif; ?>
+    <?php endforeach;
+    else:
+        echo \JText::_('NO_RECORD_FOUND');
+    endif; ?>
 </div>

@@ -18,13 +18,12 @@ defined('_JEXEC') or die;
         </div>
     <?php endif; ?>
 
-    <?php if (JFactory::getUser()->id == $this->data->id) : ?>
-        <ul class="btn-toolbar float-right">
-            <li class="btn-group">
-                <a class="btn" href="<?php echo JRoute::_('index.php?option=com_test&task=test.view&user_id=' . (int) $this->data->id); ?>">
-                    <span class="icon-user"></span> <?php echo JText::_('COM_USERS_EDIT_PROFILE'); ?>
-                </a>
-            </li>
-        </ul>
-    <?php endif; ?>
+    <table class="table">
+        <tr><th><?php echo \JText::_('NAME') ?></th><td><?php echo $this->user->name ?></td></tr>
+        <?php foreach( $this->user->fields as $f): ?>
+            <tr><th><?php echo $f->label ?></th><td><?php echo $f->value ?></td></tr>
+        <?php endforeach; ?>
+    </table>
+
+         
 </div>

@@ -1,12 +1,12 @@
 <?php
 /**
- * @package     Joomla.Site
+ * @package     Joomla.Administrator
  * @subpackage  com_test
  *
  * @copyright   Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-namespace Joomla\Component\Test\Site\Model;
+namespace Joomla\Component\Test\Administrator\Model;
 
 defined('_JEXEC') or die;
 
@@ -19,7 +19,7 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.6
  */
-class TestModel extends ListModel
+class ProfilesModel extends ListModel
 {
 	/**
 	 * Constructor.
@@ -36,7 +36,9 @@ class TestModel extends ListModel
 			$config['filter_fields'] = array(
 				'id', 'a.id',
 				'name', 'u.name',
-				'state', 'a.state'
+				'state', 'a.state',
+				'checked_out', 'a.checked_out',
+				'checked_out_time', 'a.checked_out_time'
 			);
 		}
 
@@ -101,6 +103,8 @@ class TestModel extends ListModel
 				'list.select',
 				'a.id AS id,'
 				. 'u.name AS name,' 
+				. 'a.checked_out AS checked_out,'
+				. 'a.checked_out_time AS checked_out_time, '
 				. 'a.state AS state' 
 			)
 		);
@@ -121,7 +125,7 @@ class TestModel extends ListModel
 			$query->where('(a.state IN (0, 1))');
 		}
 
-		$query->group('a.id, u.name, a.state');
+		$query->group('a.id, u.name, a.checked_out, a.checked_out_time, a.state');
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');

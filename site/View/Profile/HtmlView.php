@@ -10,7 +10,6 @@ namespace Joomla\Component\Test\Site\View\Profile;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Helper\AuthenticationHelper;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 
 /**
@@ -50,14 +49,6 @@ class HtmlView extends BaseHtmlView
 	protected $pageclass_sfx = '';
 
 	/**
-	 * Array containing the available two factor authentication methods
-	 *
-	 * @var    string
-	 * @since  __DEPLOY_VERSION__
-	 */
-	protected $tfa = '';
-
-	/**
 	 * Method to display the view.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
@@ -86,9 +77,6 @@ class HtmlView extends BaseHtmlView
 		{
 			$this->setLayout($active->query['layout']);
 		}
-
-		$tfa = AuthenticationHelper::getTwoFactorMethods();
-		$this->tfa = is_array($tfa) && count($tfa) > 1;
 
 		// Escape strings for HTML output
 		$this->pageclass_sfx = htmlspecialchars($this->params->get('pageclass_sfx'), ENT_COMPAT, 'UTF-8');
